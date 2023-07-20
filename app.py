@@ -27,7 +27,8 @@ def get_question():
 
     question = {
         "question": f"The correct word for {number} is ________.",
-        "choices": choices
+        "choices": options,
+        "correctAnswer": options.index(correct_word)
     }
 
     return jsonify(question)
