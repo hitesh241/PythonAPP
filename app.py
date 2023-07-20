@@ -1,37 +1,18 @@
-import random
-from num2words import num2words
+# app.py
 from flask import Flask, jsonify
+from question_generator import generate_question_word, generate_question_number
 
 app = Flask(__name__)
 
-@app.route('/question', methods=['GET'])
-def get_question():
-    number = random.randint(10, 100)
-    correct_word = num2words(number)
-    options = [correct_word]
+question_templates = [
+    (generate_question_word,),
+    (generate_question_number,)
+]
 
-    while len(options) < 4:
-        random_number = random.randint(1, 100)
-        random_word = num2words(random_number)
-        if random_word not in options:
-            options.append(random_word)
-
-    random.shuffle(options)
-
-    choices = {
-        "A": options[0],
-        "B": options[1],
-        "C": options[2],
-        "D": options[3]
-    }
-
-    question = {
-        "question": f"The correct word for {number} is ________.",
-        "choices": options,
-        "correctAnswer": options.index(correct_word)
-    }
-
-    return jsonify(question)
+@app.route('/questions', methods=['GET'])
+def get_questions():
+    questions = [generator() for generator, in question_templates]
+    return jsonify({"questions": questions})
 
 if __name__ == '__main__':
     app.run()
