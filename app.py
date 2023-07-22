@@ -1,8 +1,9 @@
-# app.py
 from flask import Flask, jsonify
+from flask_cors import CORS
 from question_generator import generate_question_word, generate_question_number
 
 app = Flask(__name__)
+CORS(app)  # Add this line to enable CORS for the entire app
 
 question_templates = [
     (generate_question_word,),
