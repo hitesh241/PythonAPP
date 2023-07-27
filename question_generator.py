@@ -53,3 +53,38 @@ def generate_question_number():
     }
 
     return question_json
+
+def question_3():
+    # Generate a random number sequence
+    start_number = random.randint(1, 100)
+    sequence = [start_number]
+    for _ in range(3):
+        sequence.append(sequence[-1] + 1)
+    sequence.append(sequence[-1] + 1)
+    
+    # Randomly select the position for the missing number
+    missing_index = random.randint(1, 3)
+    missing_number = sequence[missing_index]
+    
+    # Generate the options
+    options = [missing_number]
+    while len(options) < 4:
+        option = random.randint(1, 100)
+        if option not in options:
+            options.append(option)
+    
+    random.shuffle(options)
+    correct_answer = missing_number
+    
+    # Create the question and options string
+    question = "Fill in the missing number.\n"
+    question += ", ".join(str(num) for num in sequence[:missing_index]) + ", ______, " + ", ".join(str(num) for num in sequence[missing_index+1:])
+
+    # Create the question JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(correct_answer)
+    }
+
+    return question_json
