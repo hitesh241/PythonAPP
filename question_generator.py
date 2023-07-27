@@ -88,3 +88,30 @@ def question_3():
     }
 
     return question_json
+
+def question_4():
+    tens = random.randint(1, 9)  # Generate a random number for the tens digit (between 1 and 9)
+    ones = random.randint(1, 10)  # Generate a random number for the ones digit (between 1 and 10)
+
+    answer = tens * 10 + ones  # Calculate the correct answer
+
+    # Generate random incorrect options by adding/subtracting random values to/from the answer
+    options = [answer]
+    while len(options) < 4:
+        option = random.randint(answer - 20, answer + 20)
+        if option != answer and option not in options and option > 0:
+            options.append(option)
+
+    random.shuffle(options)  # Randomly shuffle the options
+
+    # Create the question and the answer options
+    question = f"{tens} tens and {ones} ones = _____"
+
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(answer)
+    }
+
+    return question_json
