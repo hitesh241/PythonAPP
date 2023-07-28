@@ -228,7 +228,7 @@ def question_13():
 
     random.shuffle(options)
 
-    question = f"Skip by {skip_value}.\n"
+    question = f"Skip by {skip_value}.  =>  "
     for i in range(1, 6):
         if i == missing_position:
             question += "________, "
