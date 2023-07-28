@@ -115,3 +115,29 @@ def question_4():
     }
 
     return question_json
+
+def question_5():
+    number = random.randint(10, 99)
+    tens = number // 10
+    ones = number % 10
+    
+    options = [
+        f"{tens} tens + {ones} ones",
+        f"{random.randint(1, 9)} tens + {random.randint(1, 9)} ones",
+        f"{random.randint(1, 9)} tens + {random.randint(1, 9)} ones",
+        f"{random.randint(1, 9)} tens + {random.randint(1, 9)} ones"
+    ]
+    random.shuffle(options)
+    
+    correct_option = options.index(f"{tens} tens + {ones} ones")
+    
+    question = f"How many tens and ones in {number}?\n"
+    
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": correct_option
+    }
+
+    return question_json
