@@ -214,3 +214,71 @@ def question_7():
     }
 
     return question_json
+
+def question_13():
+    skip_value = random.randint(2, 9)
+    missing_position = random.randint(3, 5)  # Position of the missing term
+    missing_term = missing_position * skip_value
+
+    options = [missing_term]  # Start with the missing term as the first option
+    while len(options) < 4:
+        option = random.randint(1, 10) * skip_value
+        if option not in options:
+            options.append(option)
+
+    random.shuffle(options)
+
+    question = f"Skip by {skip_value}.\n"
+    for i in range(1, 6):
+        if i == missing_position:
+            question += "________, "
+        else:
+            question += f"{i * skip_value}, "
+    question = question.rstrip(", ")  # Remove the trailing comma and whitespace
+
+    answer_options = "A) {} \nB) {}\nC) {}\nD) {}\n".format(*options)
+    answer = chr(ord('a') + options.index(missing_term))
+
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(missing_term)
+    }
+
+    return question_json
+
+def question_15():
+    # Generate a random number sequence
+    start_number = random.randint(1, 100)
+    sequence = [start_number]
+    increment = random.randint(2, 9)  # Random increment value between 2 and 9
+    for _ in range(3):
+        sequence.append(sequence[-1] + increment)
+    sequence.append(sequence[-1] + increment)
+    
+    # Randomly select the position for the missing number
+    missing_index = random.randint(1, 3)
+    missing_number = sequence[missing_index]
+    
+    # Generate the options
+    options = [missing_number]
+    while len(options) < 4:
+        option = random.randint(1, 100)
+        if option not in options:
+            options.append(option)
+    
+    random.shuffle(options)
+    
+    # Create the question and options string
+    question = "Fill in the missing number.\n"
+    question += ", ".join(str(num) for num in sequence[:missing_index]) + ", ______, " + ", ".join(str(num) for num in sequence[missing_index+1:])
+    
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(missing_number)
+    }
+
+    return question_json
