@@ -141,3 +141,76 @@ def question_5():
     }
 
     return question_json
+
+def question_6():
+    words = ["INDIA", "UNITED", "AUSTRALIA", "BRAZIL", "CANADA", "GERMANY", "EGYPT", "FRANCE", "JAPAN", "ITALY",
+             "ARGENTINA", "MEXICO", "CHINA", "RUSSIA", "SPAIN", "SWEDEN", "THAILAND", "TURKEY", "UKRAINE", "VIETNAM"]
+
+    letters = ["I", "D", "A", "B", "C", "G", "E", "F", "J", "L",
+               "N", "M", "H", "R", "S", "W", "T", "U", "K", "V"]
+
+    word = random.choice(words)
+    letter = random.choice(letters)
+
+    # Count the number of occurrences of the letter in the word
+    count = word.count(letter)
+
+    # Regenerate options if count is zero
+    while count == 0:
+        word = random.choice(words)
+        count = word.count(letter)
+
+    # Generate unique random options
+    options = [count]
+    while len(options) < 4:
+        random_count = random.randint(1, len(word))
+        if random_count not in options:
+            options.append(random_count)
+
+    # Shuffle the options
+    random.shuffle(options)
+
+    # Create the question and answer options
+    question = f"How many times does the letter '{letter}' appear in the word '{word}'?"
+    answer_options = {
+        "A": options[0],
+        "B": options[1],
+        "C": options[2],
+        "D": options[3]
+    }
+
+    answer_options_string = "\n".join([f"{key}) {value}" for key, value in answer_options.items()])
+
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(count)
+    }
+
+    return question_json
+
+def question_7():
+    number = random.randint(1, 99)  # Generate a random number
+
+    correct_option = number + 1  # The correct option is the number incremented by 1
+
+    options = [correct_option]
+    while len(options) < 4:
+        random_number = random.randint(1, 100)
+        if random_number not in options:
+            options.append(random_number)
+
+    # Shuffle the options including the correct option
+    random.shuffle(options)
+
+    question = f"______ comes after {number}."
+
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(correct_option)
+    }
+
+    return question_json
