@@ -77,7 +77,7 @@ def question_3():
     correct_answer = missing_number
     
     # Create the question and options string
-    question = "Fill in the missing number.\\n\\n"
+    question = "Fill in the missing number."
     question += ", ".join(str(num) for num in sequence[:missing_index]) + ", ______, " + ", ".join(str(num) for num in sequence[missing_index+1:])
 
     # Create the question JSON
