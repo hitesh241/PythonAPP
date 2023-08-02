@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from question_generator import generate_question_word, generate_question_number, question_3, question_4, question_5
-from question_generator import question_6, question_7, question_13, question_15
+from question_generator import question_6, question_7, question_13, question_15, question_17, question_18
 
 # import random
 
@@ -17,7 +17,9 @@ question_templates = [
     (question_6,),
     (question_7,),
     (question_13,),
-    (question_15,)
+    (question_15,),
+    (question_17,),
+    (question_18,)
 ]
 
 @app.route('/questions', methods=['GET'])

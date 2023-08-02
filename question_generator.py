@@ -282,3 +282,61 @@ def question_15():
     }
 
     return question_json
+
+def question_17():
+    total_marbles = random.randint(5, 10)  # Randomly determine the total number of marbles (between 5 and 10)
+    given_away = random.randint(1, min(3, total_marbles))  # Randomly determine the number of marbles given away (up to 3 or the total number of marbles)
+
+    remaining_marbles = total_marbles - given_away  # Calculate the number of marbles remaining
+
+    options = [remaining_marbles]  # List to store the answer options
+    while len(options) < 4:
+        option = random.randint(1, total_marbles)  # Generate a random option between 1 and the total number of marbles
+        if option not in options:
+            options.append(option)
+
+    random.shuffle(options)  # Randomly shuffle the answer options
+
+    # Create the question and options string
+    question = f"If you have {total_marbles} marbles and give away {given_away} marble(s), how many marbles do you have left?"
+
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(remaining_marbles)
+    }
+
+    return question_json
+
+def question_18():
+    total_cookies = random.randint(6, 12) // 2 * 2  # Randomly determine the total number of cookies (between 6 and 12) and ensure it is even
+    num_friends = random.randint(2, min(4, total_cookies // 2))  # Randomly determine the number of friends (up to 4 or half the total number of cookies)
+
+    cookies_per_friend = total_cookies // num_friends  # Calculate the number of cookies each friend will get
+    remainder = total_cookies % num_friends  # Calculate the remainder
+
+    # Adjust the cookies per friend to avoid fractions
+    if remainder != 0:
+        total_cookies -= remainder
+        cookies_per_friend = total_cookies // num_friends
+
+    options = [cookies_per_friend]  # List to store the answer options
+    while len(options) < 4:
+        option = random.randint(1, total_cookies)  # Generate a random option between 1 and the total number of cookies
+        if option not in options:
+            options.append(option)
+
+    random.shuffle(options)  # Randomly shuffle the answer options
+
+    # Create the question and options string
+    question = f"If you have {total_cookies} cookies and share them equally among {num_friends} friend(s), how many cookies will each friend get?"
+
+    # Create the question and options JSON
+    question_json = {
+        "question": question,
+        "choices": options,
+        "correctAnswer": options.index(cookies_per_friend)
+    }
+
+    return question_json
