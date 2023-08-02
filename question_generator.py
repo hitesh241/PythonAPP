@@ -228,7 +228,7 @@ def question_13():
 
     random.shuffle(options)
 
-    question = f"Skip by {skip_value}.  =>  "
+    question = f"Skip by {skip_value}, and find the missing number  "
     for i in range(1, 6):
         if i == missing_position:
             question += "________, "
@@ -271,7 +271,7 @@ def question_15():
     random.shuffle(options)
     
     # Create the question and options string
-    question = "Fill in the missing number.\n"
+    question = "Fill in the missing number in the pattern     \n"
     question += ", ".join(str(num) for num in sequence[:missing_index]) + ", ______, " + ", ".join(str(num) for num in sequence[missing_index+1:])
     
     # Create the question and options JSON
